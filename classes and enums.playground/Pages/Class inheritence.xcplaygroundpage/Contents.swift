@@ -73,8 +73,61 @@ let depecheModeCD = CD(cdTitle: "Silent",
 
 
 
-depecheModeCD.viewDescription()
+// depecheModeCD.viewDescription()
 
+
+class Library {
+    private var items: [Item] = []
+    
+    init(_ item: [Item]) {
+        self.items = item
+        
+    }
+    
+    func addItem( item: Item) {
+        items.append(item)
+    }
+    
+    func removeItem(_ item: Item) {
+        if let index = items.firstIndex (where: { $0.title == item.title } ){
+            items.remove(at: index)
+        } else {
+            print("we dont have item in list")
+        }
+    }
+    
+    func listItems()  {
+        items.forEach {
+            item in item.viewDescription()
+        }
+    }
+    
+    func numberOfItems() -> Int {
+        items.count
+    }
+    
+    func reset() {
+        items = []
+    }
+    
+    
+    func isEmpty() -> Bool {
+        items.isEmpty
+    }
+    
+}
+
+
+let item2 = DVD(dvdTitle: "dvd2", dvdDescription: "dvd2 description", dvdDirector: "dvd director", dvdCertificate: "dvd description")
+let item3 = Book(bookTitle: "nerealus", bookDescription: "book description", bookAuthor: "lietuviu liaudis", bookIsbn: "asdasd")
+
+// inicijuojame klase
+let biblioteka = Library([])
+
+biblioteka.addItem(item: item2)
+biblioteka.addItem(item: item3)
+
+biblioteka.listItems()
 
 
 
