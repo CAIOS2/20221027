@@ -14,7 +14,7 @@ class Vehicle {
     private let name: String
     private let purchaseCost: Double
     private let costToRun: Double
-    private let fuelType: String
+    private let fuelType: FuelType
     private var currentSpeed: Double
     var currentGear: Int
     
@@ -23,7 +23,7 @@ class Vehicle {
         name: String,
         purchaseCost: Double,
         costToRun: Double,
-        fuelType: String,
+        fuelType: FuelType,
         currentSpeed: Double,
         currentGear: Int
     ) {
@@ -60,8 +60,8 @@ class Vehicle {
         }
     }
     
-    func isValidGear(gear: Int, fuelType: String) -> Bool {
-        if fuelType.lowercased() == FuelType.electric.rawValue && (gear > 2 || gear < -1) {
+    func isValidGear(gear: Int, fuelType: FuelType) -> Bool {
+        if fuelType == .electric && (gear > 2 || gear < -1) {
             print("Invalid gear, unable to change it!")
             return false
         }
@@ -70,7 +70,7 @@ class Vehicle {
 }
 
 //let petrolVehicle = Vehicle(name: "BMW", purchaseCost: 15500, costToRun: 100, fuelType: FuelType.petrol.rawValue, currentSpeed: 0, currentGear: 0)
-let electricVehicle = Vehicle(name: "Tesla", purchaseCost: 35000, costToRun: 10, fuelType: FuelType.electric.rawValue , currentSpeed: 100, currentGear: 4)
+let electricVehicle = Vehicle(name: "Tesla", purchaseCost: 35000, costToRun: 10, fuelType: .electric , currentSpeed: 100, currentGear: 4)
 //let dieselVehicle = Vehicle(name: "VW", purchaseCost: 5000, costToRun: 50, fuelType: FuelType.diesel.rawValue, currentSpeed: 30, currentGear: 3)
 
 
