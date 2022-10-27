@@ -2,6 +2,12 @@ import UIKit
 
 var greeting = "Hello, playground"
 
+enum FuelType: String, CaseIterable{
+    case electric   = "electric"
+    case petrol     = "petrol"
+    case diesel     = "diesel"
+}
+
 
 class Vehicle {
     // MARK: Variables
@@ -55,9 +61,7 @@ class Vehicle {
     }
     
     func isValidGear(gear: Int, fuelType: String) -> Bool {
-        // (       FALSE          ) ir (         TRUE            )
-        //                                         (  TRUE  arba   FALSE )
-        if fuelType.lowercased() == "electric" && (gear > 2 || gear < -1) {
+        if fuelType.lowercased() == FuelType.electric.rawValue && (gear > 2 || gear < -1) {
             print("Invalid gear, unable to change it!")
             return false
         }
@@ -65,9 +69,9 @@ class Vehicle {
     }
 }
 
-//let petrolVehicle = Vehicle(name: "BMW", purchaseCost: 15500, costToRun: 100, fuelType: "petrol", currentSpeed: 0, currentGear: 0)
-let electricVehicle = Vehicle(name: "Tesla", purchaseCost: 35000, costToRun: 10, fuelType: "EleCtric", currentSpeed: 100, currentGear: 4)
-//let dieselVehicle = Vehicle(name: "VW", purchaseCost: 5000, costToRun: 50, fuelType: "diesel", currentSpeed: 30, currentGear: 3)
+//let petrolVehicle = Vehicle(name: "BMW", purchaseCost: 15500, costToRun: 100, fuelType: FuelType.petrol.rawValue, currentSpeed: 0, currentGear: 0)
+let electricVehicle = Vehicle(name: "Tesla", purchaseCost: 35000, costToRun: 10, fuelType: FuelType.electric.rawValue , currentSpeed: 100, currentGear: 4)
+//let dieselVehicle = Vehicle(name: "VW", purchaseCost: 5000, costToRun: 50, fuelType: FuelType.diesel.rawValue, currentSpeed: 30, currentGear: 3)
 
 
 print(electricVehicle.currentGear)
