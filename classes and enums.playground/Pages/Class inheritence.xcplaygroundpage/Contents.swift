@@ -1,80 +1,112 @@
-
-//MARK: - Parent Class -
-
 class Item {
-    let title: String
-    let description: String
+    var title: String
+    var description: String
     
-    init(itemTitle: String, itemDescription: String) {
-        self.title = itemTitle
-        self.description = itemDescription
+    init(title: String, description: String) {
+        self.title = title
+        self.description = description
     }
     
-    func viewDescription() { print("Child missed to override method") }
+    func viewDescription() {
+        print("Item: \(self.title). Description: \(self.description)")
+    }
 }
 
-//MARK: - Child Classes -
-
-class Book: Item {
-    let author: String
-    let isbn: String
+class Book : Item {
+    var author: String
+    var isbn: String
     
-    init(bookTitle: String, bookDescription: String, bookAuthor: String, bookIsbn: String) {
-        self.author = bookAuthor
-        self.isbn = bookIsbn
-    
-        super.init(itemTitle: bookTitle, itemDescription: bookDescription)
+    init(title: String, description: String, author: String, isbn: String) {
+        self.author = author
+        self.isbn = isbn
+        
+        super.init(title: title, description: description)
     }
     
     override func viewDescription() {
-        print("This book is named \(title) of \(description). Written by \(author). You can buy by searching for ISBN: \(isbn)")
+        print("Book: \(self.title), \(self.description), \(self.author), \(self.isbn)")
     }
 }
 
 class DVD: Item {
-    let director: String
-    let certificate: String
+    var director: String
+    var certificate: String
     
-    init(dvdTitle: String, dvdDescription: String, dvdDirector: String, dvdCertificate: String) {
-        self.director = dvdDirector
-        self.certificate = dvdCertificate
-    
-        super.init(itemTitle: dvdTitle, itemDescription: dvdDescription)
+    init(title: String, description: String, director: String, certificate: String) {
+        self.director = director
+        self.certificate = certificate
+        
+        super.init(title: title, description: description)
     }
     
     override func viewDescription() {
-        print("Movie \(title). \(description). Movie director is \(director). DVD certified \(certificate)")
+        print("DVD: \(self.title), \(self.description), \(self.director), \(self.certificate)")
     }
 }
 
 class CD: Item {
-    let artist: String
-    let genre: String
-    let numberOfTracks: Int
+    var artist: String
+    var genre: String
+    var numberOfTracks: Int
     
-    init(cdTitle: String, cdDescription: String, cdArtist: String, cdGenre: String, numberOfCDTracks: Int) {
-        self.artist = cdArtist
-        self.genre = cdGenre
-        self.numberOfTracks = numberOfCDTracks
-    
-        super.init(itemTitle: cdTitle, itemDescription: cdDescription)
+    init(title: String, description: String, artist: String, genre: String, numberOfTracks: Int) {
+        self.artist = artist
+        self.numberOfTracks = numberOfTracks
+        self.genre = genre
+        
+        super.init(title: title, description: description)
     }
     
     override func viewDescription() {
-        print("Music title: \(title) about \(description). Artist \(artist) of genre \(genre). Contains \(numberOfTracks) \(numberOfTracks > 1 ? "tracks" : "track")")
+        print("CD: \(self.title), \(self.description), \(self.artist), \(self.genre), \(self.numberOfTracks)")
     }
 }
 
-let depecheModeCD = CD(cdTitle: "Silent",
-                       cdDescription: "No description",
-                       cdArtist: "Depeche",
-                       cdGenre: "electronic",
-                       numberOfCDTracks: 0)
+class Library {
+    var items: [Item]
+    
+    init(items: [Item]) {
+        self.items = items
+    }
+    
+    func addItem(item: Item) {
+        items.append(item)
+    }
+    
+    func removeItem(title: String) {
+        var i = 0
+        for each in items {
+            if each.title == title {
+                self.items.remove(at: i)
+            }
+            i += 1
+        }
+    }
+    
+    func listItems() {
+        for each in items {
+            each.viewDescription()
+        }
+    }
+    
+    func numberOfItems() {
+        print(self.items.count)
+    }
+    
+    func reset() {
+        self.items = []
+    }
+    
+    func isEmpty() -> Bool {
+        return self.items.isEmpty
+    }
+}
 
 
+let depecheModeCD = CD(title: "Silent",
+                       description: "No description",
+                       artist: "Depeche",
+                       genre: "electronic",
+                       numberOfTracks: 12)
 
 depecheModeCD.viewDescription()
-
-
-
-
